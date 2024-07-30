@@ -11,7 +11,7 @@
 const justePrix = 57;
 
 //declaration et initialisation du tableau des joueurs
-const joueurs = [];
+let joueurs = [];
 const NB_JOUEURS = 4 ;
 //récupération des données du formulaire
 const form = document.getElementById("monFormulaire");
@@ -72,6 +72,7 @@ form.addEventListener("submit", (event) => {
   afficherjoueurs();
   if (joueurs.length === NB_JOUEURS) {
     calculerVainqueur();
+    joueurs =[];
   }
   document.getElementById("name").value = '';
   document.getElementById("goodprice").value = null;
