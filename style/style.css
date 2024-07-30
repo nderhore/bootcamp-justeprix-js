@@ -1,0 +1,85 @@
+form {
+    /* On centre le formulaire */
+    margin: 0 auto;
+    width: 400px;
+    /* Le contour du formulaire */
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  form li + li {
+    margin-top: 1em;
+  }
+  
+  label {
+    /* Taille et alignement uniformes */
+    display: inline-block;
+    width: 90px;
+    text-align: right;
+  }
+  
+  input,
+  textarea {
+    /* On s'assure que les champs texte ont la même police
+       Par défaut, les zones de texte ont une police à chasse
+       fixe. */
+    font: 1em sans-serif;
+  
+    /* Taille uniforme pour des champs */
+    width: 300px;
+    box-sizing: border-box;
+  
+    /* On utilise la même bordure que pour le formulaire */
+    border: 1px solid #999;
+  }
+  
+  input:focus,
+  textarea:focus {
+    /* On rajoute une mise en avant pour les éléments avec
+       le focus. */
+    border-color: #000;
+  }
+  
+  textarea {
+    /* On aligne les textes sur plusieurs lignes avec leur
+       libellé. */
+    vertical-align: top;
+  
+    /* On fournit un peut d'espace pour saisir du texte. */
+    height: 5em;
+  
+    /* On permet de redimensionner verticalement. */
+    resize: vertical;
+  }
+  
+  .button {
+    /* On aligne les boutons avec les champs texte. */
+    padding-left: 90px; /* La même taille que les libellés */
+    padding-top: 15px;
+  }
+  
+  button {
+    /* Une marge supplémentaire représentant approximativement
+       le même espace qu'entre les libellés et les champs. */
+    margin-left: 0.5em;
+  }
+  
+  
+  button:after {
+    content: " >>>";
+  }
+  
+  button:hover,
+  button:focus {
+    outline: none;
+    background: #000;
+    color: #fff;
+  }
+  
