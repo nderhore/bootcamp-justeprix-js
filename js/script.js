@@ -11,82 +11,69 @@
 const justePrix = 57;
 
 //declaration et initialisation du tableau des joueurs
-const player = [];
+let joueurs = [];
+const NB_JOUEURS = 4 ;
+//récupération des données du formulaire
+const form = document.getElementById("monFormulaire");
+const liste = document.getElementById("liste");
 
-// 0 , 1 , 2, 3
-/**
- * Boucle 1 : récupération du nom avec le score proposée + stockage
- */
-for(let i = 0; i < 3; i++){
-    //recuperation du nom du joueur
-    let namePlayer = prompt("Entrez votre nom : ");
 
-    //recuperation du score
-    let score = parseInt(prompt("Entrez le prix : "));
-
-    player.push([namePlayer,score]); //
-    /**
-     * [
-     * ["frederic",58],
-     * ["melissa",48]
-     * ]
-     */
+function afficherjoueurs(){
+    liste.innerHTML = '';
+     joueurs.forEach((joueur)=> {
+      let element = document.createElement("li");
+      element.innerText = 
+      "Nom du joueur : " +
+      joueur.name +
+      " Prix choisi : " +
+      joueur.price;
+      liste.append(element);
+     });  
 }
 
-/**
- * Boucle 2 : calculer la valeur absolue et remplacer le score du joueur donnée par celle-ci
- */
-for(let i = 0; i< player.length; i++){
-
-    /**
-     * [
-     *  ["frederic",58],
-     *  ["melissa",48]
-     * ]
-     */
-
-    // calculer la valeur absolue du player donné
-    const absolue = Math.abs(player[i][1] - justePrix);
-    console.log(absolue);
-
-    // modifier le score du joueur pour lui donner la valeur absolue
-    player[i][1] = absolue;
-}
-
-/**
- * Boucle 3 : trouver qui a gagné, ce qui veux dire, le joueur qui a le score le moins elevees
- **/
-
-//pour le moment, je dis que le premier joueur a gagné
-
-/**
- *
- *
- * [
- * ["frederic",1]
- * ]
- *
- **/
-let gagnant = [player[0]];
-
-// je boucle sur chaque element
-for(let i = 0; i < player.length; i++){
-
-    /**
-     * [
-     *  ["frederic",1],
-     *  ["thibaut",0],
-     *  ["melissa",9]
-     * ]
-     */
-
-    if(player[i][1] < gagnant[0][1]) {
-        gagnant = player[i];
+function calculerVainqueur() {
+  joueurs.forEach((joueur) => {
+    joueur.absolue = Math.abs(joueur.price - justePrix);
+  });
+  let gagnant = joueurs[0] ;
+  for (let i = 1; i < joueurs.length; i++) {
+    if (gagnant.absolue > joueurs[i].absolue) {
+      gagnant = joueurs[i];
     }
+  }
+
+
+  /***
+   * gagnant: {
+   *  name ,
+   *  price
+   *  absolue
+   * }
+   */
+
+  document.getElementById("gagnant").innerText =
+    "le joueur " +
+    gagnant.name +
+    " a gagné, avec une difference de " +
+    gagnant.absolue;
 }
 
-/**
- * écriture dans le html
- */
-
-document.getElementById("gagnant").innerText = "le joueur " + gagnant[0][0] + " a gagné, avec une difference de " + gagnant[0][1];
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  //const values= new FormData(form);
+  const name = document.getElementById("name").value;
+  const price = document.getElementById("goodprice").value;
+  const joueur = {
+    name: name,
+    price: price,
+    absolue: -1
+  };
+  joueurs.push(joueur);
+  afficherjoueurs();
+  if (joueurs.length === NB_JOUEURS) {
+    calculerVainqueur();
+    joueurs =[];
+  }
+  document.getElementById("name").value = '';
+  document.getElementById("goodprice").value = null;
+});
